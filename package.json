@@ -1,0 +1,37 @@
+{
+  "name": "desarrolloweb_tiendaonlinereactjs_jesus_abril",
+  "version": "1.0.0",
+  "description": "Tienda online con ReactJs",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "bootstrap": "^4.3.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1",
+    "superagent": "^5.1.0",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-loader": "^7.1.5",
+    "webpack": "^4.39.0"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --hot"
+  },
+  "keywords": [
+    "Tienda",
+    "online",
+    "online",
+    "shop",
+    "reactjs"
+  ],
+  "author": "Jesus Abril",
+  "license": "ISC"
+}
