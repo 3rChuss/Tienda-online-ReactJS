@@ -51,7 +51,6 @@ class Productos extends React.Component{
     calculaUnidades(e){
         let cantidad = e.target.value;
         let cantidadRestante =  this.props.productoSimple.unidadesDisponibles - cantidad;
-        console.log(cantidadRestante);
         this.setState({
             unidadesDisponibles : cantidadRestante,
             unidadesSolicitadas : cantidad
