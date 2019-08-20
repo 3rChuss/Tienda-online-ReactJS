@@ -11,16 +11,13 @@ class App extends React.Component{
     render(){
         return(
           <div className="bg-tienda fill">
-            <div className="container">
             <Router>
-              <Menu />  
               <Switch>
                   <Route exact path="/tienda" component = {Tienda} />
                   <Route exact path="/carrito" component = {Carrito} />
                   <Route path="/detalles/:nombreProducto" component = {Detalles} />
                 </Switch>
               </Router>
-              </div>
             </div>
           );
         }
