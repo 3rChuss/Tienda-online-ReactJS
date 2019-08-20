@@ -29,15 +29,11 @@ class Productos extends React.Component{
                 <Link to={links} title="Ver producto"><h4 className="card-title">{this.props.productoSimple.nombre}</h4></Link>
                     <p>Precio: {this.props.productoSimple.precio} ‎R$</p>
                     <p>Stock: {this.props.productoSimple.unidadesDisponibles - this.state.unidadesSolicitadas}</p>
-                    <div className="row">
-                        <div className="col">
-                            <p className="btn btn-danger btn-block">Ver más</p>
-                        </div>
-                        <div className="col">
-                            <button type="button" className="btn btn-success btn-block" onClick={()=>{this.addTocart(this.props.productoSimple.id)}}><i className="fa fa-shopping-cart"></i></button>
-                        </div>
-                        <div className="col centered">
-                        <input type="number" name={this.props.productoSimple.nombre} value={this.state.unidadesSolicitadas} onChange={(e) => this.calculaUnidades(e)} />
+                    <div className="input-group">
+                        <div className="file-field input-field">
+                            <Link to={links} className="btn btn-danger btn-block">Ver más</Link>
+                            <button className="btn btn-success btn-block" onClick={()=>{this.addTocart(this.props.productoSimple.id)}}><i className="fa fa-shopping-cart"></i></button>
+                            <input type="number" name={this.props.productoSimple.nombre} value={this.state.unidadesSolicitadas} min="0" max={this.props.unidadesDisponibles} onChange={(e) => this.calculaUnidades(e)} />
                         </div>
                     </div> 
                 </div>
@@ -45,7 +41,7 @@ class Productos extends React.Component{
         )
     }
 
-    addTocart(id){
+    addTocart(e){
     }
 
     calculaUnidades(e){
@@ -66,6 +62,7 @@ class Productos extends React.Component{
 
     componentWillMount(){
         this.setState({
+            producto : this.props.productoSimple,
             unidadesDisponibles : this.props.productoSimple.unidadesDisponibles
         })
     }

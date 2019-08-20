@@ -5,6 +5,11 @@ import { Link } from 'react-router-dom';
 class Menu extends React.Component{
     constructor(){
         super();
+
+        this.state = {
+          unidades : 0,
+          productos : []
+        }
     }
 
     render(){
@@ -36,6 +41,12 @@ class Menu extends React.Component{
               </div>
             </nav>
         )
+    }
+
+    componentWillReceiveProps(){
+      this.setState({
+        unidades : this.props.cantidad
+      })
     }
 }
 

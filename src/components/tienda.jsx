@@ -17,14 +17,13 @@ class Tienda extends React.Component{
         const tabla = [];
         let productosTotales = this.state.productos;
         
-        if(this.state.resultadoBusqueda.length)
+        if(!this.state.resultadoBusqueda.length == 0)
         {
             console.log('Resultado de la busqueda ......');
             productosTotales = this.state.resultadoBusqueda;   
         }
         for (let i = 0; i < productosTotales.length; i++) {
             const element = productosTotales[i];
-            console.log(element);
             tabla.push(
                 <div className="col-12 col-md-6 col-lg-3 mb-4" key={i}>
                     <Productos productoSimple={element}/>

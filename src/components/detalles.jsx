@@ -17,10 +17,12 @@ class Detalles extends React.Component{
                         <h1>{this.state.producto.nombre}</h1>
                         <hr/>
                     </div>
+                </div>
+                <div className="row">
                     <div className="col-sm-8">
-                        <img src={"../src/img/"+this.state.producto.imagen} className="rounded border p-2" alt={this.state.producto.nombre}/>
+                        <img src={"../src/img/"+this.state.producto.imagen} className="img-fluid rounded border p-2" alt={this.state.producto.nombre}/>
                     </div>
-                    <div className="col-sm-4 float-left">
+                    <div className="col">
                         <span><h2>Precio: {this.state.producto.precio}</h2></span>
                         <span><h3>Ud. Disponibles: {this.state.producto.unidadesDisponibles}</h3></span>
                     </div>
