@@ -2,6 +2,7 @@ import React from 'react';
 import * as Request from  'superagent';
 import Productos from './productos.jsx';
 import Menu from './menu.jsx'
+import Helper from '../helper.js';
 
 class Tienda extends React.Component{
     constructor(){
@@ -9,7 +10,8 @@ class Tienda extends React.Component{
         this.state = {
             productos : [],
             resultadoBusqueda: [],
-            err : ''
+            err : '',
+            badgetCarrito : null
         }
     }
 
@@ -33,7 +35,7 @@ class Tienda extends React.Component{
 
         return(
             <div className="container">
-                <Menu cantidad={this.props.cantidad}/>  
+                <Menu />  
             <div className="bg-container mt-3 p-3 rounded">
                 <div className="row">
                     <div className="col-sm-8">
@@ -57,6 +59,12 @@ class Tienda extends React.Component{
 
     componentWillMount(){
         this.getProductos();
+    }
+    
+    updateBadget(){
+        this.setState({
+            badgetCarrito : Helper.badgetCarrito
+        })
     }
 
     buscarProducto(e){

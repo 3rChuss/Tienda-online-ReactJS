@@ -23,7 +23,7 @@ class Menu extends React.Component{
                   <ul className="navbar-nav ml-auto nav-flex-icons">
                     <li className="nav-item">
                       <Link to="/carrito" className="nav-link waves-effect waves-light">
-                          <i className="fa fa-shopping-cart"></i><span className="badge">{this.props.state}</span>
+                          <i className="fa fa-shopping-cart"></i><span className="badge">{this.props.cantidad}</span>
                       </Link>
                     </li>
                     <li className="nav-item">

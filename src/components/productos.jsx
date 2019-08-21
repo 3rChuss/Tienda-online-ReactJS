@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import Menu from './menu.jsx';
+import Tienda from './tienda.jsx';
+import Helper from '../helper.js';
 
 class Productos extends React.Component{
     constructor(){
@@ -8,7 +9,8 @@ class Productos extends React.Component{
         this.state = {
             producto : {},
             unidadesDisponibles: 0,
-            unidadesSolicitadas : 0
+            unidadesSolicitadas : 0,
+            cantidadProductos : 0,
         }
     }
 
@@ -35,8 +37,8 @@ class Productos extends React.Component{
                                 <Link to={links} className="btn btn-danger btn-sm">Ver más</Link>
                             </div>
                             <div className="btn-group inline pull-right">
-                                <button className="btn btn-success btn-sm" onClick={()=>{this.addTocart(this.props.productoSimple.id)}}>Add <i className="fa fa-shopping-cart"></i></button>
-                                <input type="number" name={this.props.productoSimple.nombre} value={this.state.unidadesSolicitadas} min="0" max={this.props.productoSimple.unidadesDisponibles} onChange={(e) => this.calculaUnidades(e)} />
+                                <button className="btn btn-success btn-sm" onClick={this.addTocart.bind(this)}>Add <i className="fa fa-shopping-cart"></i></button>
+                                <input type="number" name={this.props.productoSimple.nombre} value={this.state.unidadesSolicitadas} min="1" max={this.props.productoSimple.unidadesDisponibles} onChange={(e) => this.calculaUnidades(e)} />
                             </div>
                         </div>
                     </div> 
@@ -46,7 +48,17 @@ class Productos extends React.Component{
         )
     }
 
-    addTocart(e){
+    addTocart(){
+        console.log('añadimos????? ' + this.state.unidadesSolicitadas);
+        Helper.badgetCarrito = this.state.unidadesSolicitadas; 
+        let producto = [];
+        producto.push(this.props.productoSimple)
+        producto.forEach((element) =>{
+            element.cantidad = this.state.unidadesSolicitadas
+        })
+        console.log(producto);
+        
+        Helper.productosPedidos.push(producto)
     }
 
     calculaUnidades(e){
@@ -72,5 +84,4 @@ class Productos extends React.Component{
         })
     }
 }
-
 export default Productos;

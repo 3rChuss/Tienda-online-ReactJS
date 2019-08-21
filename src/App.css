@@ -37,3 +37,12 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number]{
     width: 40px;
 }
+
+.carrito{
+    max-width: 150px;
+    max-height: 150px;
+}
+
+.table td, .table th{
+    vertical-align: middle;
+}
