@@ -29,15 +29,20 @@ class Productos extends React.Component{
                 <Link to={links} title="Ver producto"><h4 className="card-title">{this.props.productoSimple.nombre}</h4></Link>
                     <p>Precio: {this.props.productoSimple.precio} ‎R$</p>
                     <p>Stock: {this.props.productoSimple.unidadesDisponibles - this.state.unidadesSolicitadas}</p>
-                    <div className="input-group">
-                        <div className="file-field input-field">
-                            <Link to={links} className="btn btn-danger btn-block">Ver más</Link>
-                            <button className="btn btn-success btn-block" onClick={()=>{this.addTocart(this.props.productoSimple.id)}}><i className="fa fa-shopping-cart"></i></button>
-                            <input type="number" name={this.props.productoSimple.nombre} value={this.state.unidadesSolicitadas} min="0" max={this.props.unidadesDisponibles} onChange={(e) => this.calculaUnidades(e)} />
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <div className="btn-group inline pull-left">
+                                <Link to={links} className="btn btn-danger btn-sm">Ver más</Link>
+                            </div>
+                            <div className="btn-group inline pull-right">
+                                <button className="btn btn-success btn-sm" onClick={()=>{this.addTocart(this.props.productoSimple.id)}}>Add <i className="fa fa-shopping-cart"></i></button>
+                                <input type="number" name={this.props.productoSimple.nombre} value={this.state.unidadesSolicitadas} min="0" max={this.props.productoSimple.unidadesDisponibles} onChange={(e) => this.calculaUnidades(e)} />
+                            </div>
                         </div>
                     </div> 
                 </div>
             </div>
+            
         )
     }
 
