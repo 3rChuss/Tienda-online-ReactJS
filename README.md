@@ -1,2 +1,5 @@
-# Tienda-online-ReactJS
-Tienda Online básica creada con ReactJs
+# Tienda Online Básica con React Js
+Proyecto de evaluación final para NextU
+
+### Reac Js & Bootstrap
+

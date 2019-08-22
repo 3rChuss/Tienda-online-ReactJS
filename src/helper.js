@@ -1,4 +1,5 @@
 const Helper = {
+    productos : [],
     badgetCarrito : 0,
     productosPedidos : []
 }

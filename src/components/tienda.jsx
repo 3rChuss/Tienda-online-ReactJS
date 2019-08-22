@@ -18,6 +18,7 @@ class Tienda extends React.Component{
     render(){
         const tabla = [];
         let productosTotales = this.state.productos;
+        Helper.productos = this.state.productos;
         
         if(!this.state.resultadoBusqueda.length == 0)
         {
