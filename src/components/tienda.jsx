@@ -11,7 +11,7 @@ class Tienda extends React.Component{
             productos : [],
             resultadoBusqueda: [],
             err : '',
-            badgetCarrito : null
+            badge : 0
         }
     }
 
@@ -19,8 +19,8 @@ class Tienda extends React.Component{
         const tabla = [];
         let productosTotales = this.state.productos;
         Helper.productos = this.state.productos;
-        
-        if(!this.state.resultadoBusqueda.length == 0)
+
+        if(!this.state.resultadoBusqueda.length == 0) // Si no hay productos que coincidan, mostramos todos
         {
             console.log('Resultado de la busqueda ......');
             productosTotales = this.state.resultadoBusqueda;   
@@ -35,8 +35,8 @@ class Tienda extends React.Component{
         }
 
         return(
-            <div className="container">
-                <Menu />  
+        <div className="container">
+                <Menu cantidad={Helper.badgetCarrito}/>  
             <div className="bg-container mt-3 p-3 rounded">
                 <div className="row">
                     <div className="col-sm-8">
@@ -54,7 +54,7 @@ class Tienda extends React.Component{
                     {tabla}
                 </div>
             </div>
-            </div>
+        </div>
         )
     }
 
@@ -62,12 +62,6 @@ class Tienda extends React.Component{
         this.getProductos();
     }
     
-    updateBadget(){
-        this.setState({
-            badgetCarrito : Helper.badgetCarrito
-        })
-    }
-
     buscarProducto(e){
         let Productos = this.state.productos;
         let resultado = [];
@@ -92,8 +86,13 @@ class Tienda extends React.Component{
             .set('Content-Type', 'application/json')
             .end( (err, res) => {
                 let ProductosArray = res.body;
-                console.log('cargando productos desde la base de datos:\n ' + JSON.stringify(ProductosArray));
-                this.setState({productos: ProductosArray})
+                let props = this.props.location.state;
+                if(props){ //Si hay propiedades -- Los datos vienen actualizados de una compra
+                    this.setState({productos: props.productos})
+                }else{ // Cargamos de la base de datos
+                    this.setState({productos: ProductosArray})
+                
+                }
             })
             
     }

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import Helper from '../helper';
 
 
 class Menu extends React.Component{
@@ -8,7 +9,8 @@ class Menu extends React.Component{
 
         this.state = {
           unidades : 0,
-          productos : []
+          productos : [],
+          badget : 0
         }
     }
 
@@ -23,16 +25,16 @@ class Menu extends React.Component{
                   <ul className="navbar-nav ml-auto nav-flex-icons">
                     <li className="nav-item">
                       <Link to="/carrito" className="nav-link waves-effect waves-light">
-                          <i className="fa fa-shopping-cart"></i><span className="badge">{this.props.cantidad}</span>
+                          <i className="fa fa-shopping-cart"></i><span className="badge bg-danger">{this.state.cantidad==0 ? '': this.state.cantidad }</span>
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link to="/mi-cuenta" className="nav-link waves-effect waves-light">
+                      <a href="#" className="nav-link waves-effect waves-light">
                           <i className="fa fa-user-circle-o"></i>
-                      </Link>
+                      </a>
                     </li>
                     <li className="nav-item">
-                        <Link to="/" className="nav-link waves-effect waves-ligh">
+                        <Link to="/login" className="nav-link waves-effect waves-ligh">
                           <i className="fa fa-sign-out"></i>
                         </Link>
                     </li>

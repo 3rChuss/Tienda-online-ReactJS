@@ -2,7 +2,7 @@ import React from 'react';
 import * as Request from 'superagent';
 import Menu from './menu.jsx';
 import Helper from '../helper.js';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Carrito extends React.Component{
     constructor(){
@@ -13,7 +13,7 @@ class Carrito extends React.Component{
     }
 
     render(){
-        let pedido = this.state.productos;
+        let pedido = this.state.productos;        
         const tabla = [];
         const total = [];
         let sum = 0;
@@ -41,19 +41,17 @@ class Carrito extends React.Component{
             )         
         }else{
             for (let index = 0; index < pedido.length; index++) {
-                const element = pedido[index];
-                for(let productoFinal of element){
-                    tabla.push(
-                        <tr key={index}>
-                            <th scope="row"><img src={"./src/img/"+productoFinal.imagen} className="img-thumbnail carrito"/></th>
-                            <th>{productoFinal.nombre}</th>
-                            <th>{productoFinal.cantidad}</th>
-                            <th>{productoFinal.precio}</th>
-                            <th>{productoFinal.precio*productoFinal.cantidad} $</th>
-                        </tr>
-                    )
-                    total.push(productoFinal.precio*productoFinal.cantidad)
-                }
+                const productoFinal = pedido[index];
+                tabla.push(
+                            <tr key={index}>
+                                <th scope="row"><img src={"./src/img/"+productoFinal.imagen} className="img-thumbnail carrito"/></th>
+                                <th>{productoFinal.nombre}</th>
+                                <th>{productoFinal.cantidad}</th>
+                                <th>{productoFinal.precio}</th>
+                                <th>{productoFinal.precio*productoFinal.cantidad} $</th>
+                            </tr>
+                        )
+                total.push(productoFinal.precio*productoFinal.cantidad)
             }
             sum = total.reduce((pv, cv) => pv + cv, 0);
 
@@ -109,19 +107,20 @@ class Carrito extends React.Component{
         })
         Helper.productosPedidos = [];
         Helper.badgetCarrito = 0;
-        this.props.history.push('/tienda')
+        this.props.history.push({ //enviamos los datos actualizados para renderizar
+            pathname: '/tienda',
+            state : {productos : Helper.productos}
+        })
     }
 
     pedidoCompletado(){
-        let productos = Helper.productosPedidos;
+        let productos = this.state.productos;
         
         for (let i = 0; i < productos.length; i++) {
-            const element = productos[i];
-            for (let a = 0; a < element.length; a++) {
-                const producto = element[a];
-                let resta = producto.unidadesDisponibles - producto.cantidad;
-                productos[i][a].unidadesDisponibles = resta;  
-            } 
+            const producto = productos[i];
+            let resta = producto.unidadesDisponibles - producto.cantidad;
+            productos[i].unidadesDisponibles = resta;
+            productos[i].cantidad = 0;
         }
 
         this.actualizaBBDD(productos)
@@ -129,13 +128,15 @@ class Carrito extends React.Component{
     }
 
     actualizaBBDD(productos){
-        console.log(productos);
-
-        Helper.productos.forEach((producto) =>{
-            console.log(producto.nombre);
-            
-        })
-        
+        for (let i = 0; i < productos.length; i++) {
+            const element = productos[i];
+            for (let a = 0; a < Helper.productos.length; a++) {
+                const helper =  Helper.productos[a];
+                if(element.nombre == helper.nombre){
+                    Helper.productos[a].unidadesDisponibles = element.unidadesDisponibles
+                }
+            }
+        }
     }
 
     componentWillMount(){

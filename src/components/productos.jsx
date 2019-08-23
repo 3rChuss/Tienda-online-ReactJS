@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Helper from '../helper.js';
+import Menu from  './menu.jsx'
 
 class Productos extends React.Component{
     constructor(){
@@ -46,15 +47,16 @@ class Productos extends React.Component{
             
         )
     }
-    addTocart(){
-        console.log('añadimos????? ' + this.state.unidadesSolicitadas);
-        Helper.badgetCarrito = this.state.unidadesSolicitadas; 
-        let producto = [];
-        producto.push(this.props.productoSimple)
-        producto.forEach((element) =>{
-            element.cantidad = this.state.unidadesSolicitadas
-        })       
-        Helper.productosPedidos.push(producto);
+    addTocart(){ 
+        let producto = this.props.productoSimple;
+        producto.cantidad = this.state.unidadesSolicitadas;
+        Helper.productosPedidos.push(producto)
+        Helper.badgetCarrito += 1;
+        this.actualizarBadge();
+    }
+
+    actualizarBadge(){
+        
     }
 
     calculaUnidades(e){

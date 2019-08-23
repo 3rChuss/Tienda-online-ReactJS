@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Helper from '../helper.js'
 
 class Detalles extends React.Component{
     constructor(){
@@ -10,6 +11,11 @@ class Detalles extends React.Component{
     }
 
     render(){
+        /* Dirigimos a tienda los productos de Helper en caso de que hayan sido actualizados*/
+        let tienda = {
+            pathname : '/tienda',
+            state : {productos : Helper.productos}
+        }
         return(
             <div className="bg-container mt-3 p-3 rounded">
                 <div className="row">
@@ -29,7 +35,7 @@ class Detalles extends React.Component{
                 </div>
                 <div className="row pt-2">
                     <div className="col-sm-2">
-                    <Link to="/tienda"><button type="button" className="btn btn-dark btn-block">Atrás</button></Link>
+                    <Link to={tienda} ><button type="button" className="btn btn-dark btn-block">Atrás</button></Link>
                     </div>
                 </div>
             </div>
@@ -37,8 +43,7 @@ class Detalles extends React.Component{
     }
 
     componentWillMount(){
-        let productoRecibido = this.props.location.state.producto    
-        console.log(productoRecibido.nombre);
+        let productoRecibido = this.props.location.state.producto 
         this.setState({
             producto : this.props.location.state.producto
         })
