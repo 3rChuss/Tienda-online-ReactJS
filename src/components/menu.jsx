@@ -9,8 +9,7 @@ class Menu extends React.Component{
 
         this.state = {
           unidades : 0,
-          productos : [],
-          badget : 0
+          productos : []
         }
     }
 
@@ -25,7 +24,7 @@ class Menu extends React.Component{
                   <ul className="navbar-nav ml-auto nav-flex-icons">
                     <li className="nav-item">
                       <Link to="/carrito" className="nav-link waves-effect waves-light">
-                          <i className="fa fa-shopping-cart"></i><span className="badge bg-danger">{this.state.cantidad==0 ? '': this.state.cantidad }</span>
+                          <i className="fa fa-shopping-cart"></i><span className="badge bg-danger">{this.badge() ? this.badge() : ''}</span>
                       </Link>
                     </li>
                     <li className="nav-item">
@@ -45,10 +44,8 @@ class Menu extends React.Component{
         )
     }
 
-    componentWillReceiveProps(){
-      this.setState({
-        unidades : this.props.cantidad
-      })
+    badge(){
+      return Helper.productosPedidos.length;
     }
 }
 

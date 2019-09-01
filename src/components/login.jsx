@@ -6,7 +6,7 @@ class Login extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            usuarioValido : true,
+            usuarioValido : false,
             error: '',
             errorClass: ''
         }
@@ -23,6 +23,8 @@ class Login extends React.Component{
     }
 
     render(){
+        console.log('3rchuss@gmail.com / 123456');
+        
         if(this.state.usuarioValido){
             console.log('Usuario validado.... Redirigiento a la tienda');
             return(
@@ -30,7 +32,7 @@ class Login extends React.Component{
             )
         }
         return(
-            <header className="bg-login fill">
+            <header className="bg-login fill h-100">
                 <div className='row'>
                     <div className='col-xl-4 col-lg-6 col-md-8 col-sm-12 m-auto text-white'>
                         <form id='form_login' className="text-center p-5" onSubmit={this.handleSubmit}>
@@ -59,7 +61,7 @@ class Login extends React.Component{
         Request.get('https://ejemplo-http-f025e.firebaseio.com/usuarios.json')
                 .set('Content-Type', 'application/json')
                 .end((err, res) => {
-                    let Usuarios = res.body;
+                    let Usuarios = res.body;                     
                     for (let index = 0; index < Usuarios.length; index++) {
                         var element = Usuarios[index];
                         if ((element.email === emailInput) && (element.passwd == passwdInput)) {

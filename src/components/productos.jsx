@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Helper from '../helper.js';
-import Menu from  './menu.jsx'
 
 class Productos extends React.Component{
     constructor(){
@@ -30,7 +29,7 @@ class Productos extends React.Component{
                 <div className="card-body text-muted">
                 <Link to={links} title="Ver producto"><h4 className="card-title">{this.props.productoSimple.nombre}</h4></Link>
                     <p>Precio: {this.props.productoSimple.precio} ‎R$</p>
-                    <p>Stock: {this.props.productoSimple.unidadesDisponibles - this.state.unidadesSolicitadas}</p>
+                    <p>Stock: {this.state.unidadesDisponibles}</p>
                     <div className="row">
                         <div className="col-sm-12">
                             <div className="btn-group inline pull-left">
@@ -38,7 +37,7 @@ class Productos extends React.Component{
                             </div>
                             <div className="btn-group inline pull-right">
                                 <button className="btn btn-success btn-sm" onClick={this.addTocart.bind(this)}>Add <i className="fa fa-shopping-cart"></i></button>
-                                <input type="number" name={this.props.productoSimple.nombre} value={this.state.unidadesSolicitadas} min="1" max={this.props.productoSimple.unidadesDisponibles} onChange={(e) => this.calculaUnidades(e)} />
+                                <input type="number" value={this.state.unidadesSolicitadas} min="1" onChange={(e) => this.calculaUnidades(e)} />
                             </div>
                         </div>
                     </div> 
@@ -48,23 +47,18 @@ class Productos extends React.Component{
         )
     }
     addTocart(){ 
+        let cantidadRestante = this.props.productoSimple.unidadesDisponibles - this.state.unidadesSolicitadas;
         let producto = this.props.productoSimple;
         producto.cantidad = this.state.unidadesSolicitadas;
         Helper.productosPedidos.push(producto)
-        Helper.badgetCarrito += 1;
-        this.actualizarBadge();
-    }
-
-    actualizarBadge(){
-        
+        this.setState({
+            unidadesDisponibles: cantidadRestante
+        })
     }
 
     calculaUnidades(e){
-        let cantidad = e.target.value;
-        let cantidadRestante =  this.props.productoSimple.unidadesDisponibles - cantidad;
         this.setState({
-            unidadesDisponibles : cantidadRestante,
-            unidadesSolicitadas : cantidad
+            unidadesSolicitadas: e.target.value
         })
         
     }

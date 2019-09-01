@@ -8,7 +8,7 @@ render(
     <BrowserRouter>
         <Switch>
             <Route exact path = '/' component = {LogIn} />
-            <Route path = '/' component = {App} />
+            <Route path = '/tienda' component = {App} />
         </Switch>
     </BrowserRouter>,
     document.getElementById('app')
